@@ -16,8 +16,7 @@
     "dotenv": "^16.0.3",
     "vue": "^2.5.2",
     "vue-resource": "^1.5.3",
-    "vue-router": "^3.0.1",
-    "vuex": "^4.0.2"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
