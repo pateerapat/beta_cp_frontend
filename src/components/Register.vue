@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="container-fluid vh-90 bg-main px-5 py-4">
+    <div class="container-fluid bg-main px-5 py-4">
       <div class="row mt-5">
         <div class="col-md-12 px-5">
           <div class="card">

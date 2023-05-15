@@ -1,4 +1,7 @@
 export default {
+  getBackendPath () {
+    return 'https://betacpbackend-production.up.railway.app'
+  },
   guestAuthenticator (router) {
     let user = localStorage.getItem('tokenDetail')
     if (user) {
@@ -9,8 +12,6 @@ export default {
     let user = localStorage.getItem('tokenDetail')
     if (user && currentPath !== 'home') {
       router.push('/home')
-    } else {
-      router.push('/')
     }
   }
 }

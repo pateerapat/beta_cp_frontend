@@ -1,25 +1,23 @@
 <template>
-  <div class="modal fade" id="login-modal" tabindex="-1">
+  <div class="modal fade" id="login-success-modal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body my-5">
-          <div class="swal2-icon swal2-error swal2-animate-error-icon" style="display: flex;">
-            <span class="swal2-x-mark">
-              <span class="swal2-x-mark-line-left"></span>
-              <span class="swal2-x-mark-line-right"></span>
-            </span>
+          <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+            <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+            <span class="swal2-success-line-tip"></span>
+            <span class="swal2-success-line-long"></span>
+            <div class="swal2-success-ring"></div>
+            <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+            <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
           </div>
           <h1 class="ff-chonburi text-center">
-            Failed to login!
+            Successfully login!
           </h1>
           <div class="px-5 mt-4 text-center">
-            <p>Your credential that you provide doesn't match our data.</p>
+            <p>We are redirecting you to our homepage, Please standby.</p>
           </div>
-          <div class="px-5 mt-4">
-            <button type="button" class="btn btn-danger w-100 py-3 fs-5 fw-bold" data-bs-dismiss="modal">
-              Try Again
-            </button>
-          </div>
+          <div id="login-success-counter" class="px-5 mt-4 fs-3 fw-bold text-center">5</div>
         </div>
       </div>
     </div>

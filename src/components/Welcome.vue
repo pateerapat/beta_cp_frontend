@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="container-fluid vh-90 bg-main px-5 py-4">
+    <div class="container-fluid bg-main px-5 py-4">
       <div class="row mt-5 pt-4">
         <div class="col-md-5 ps-5">
           <img width="550" src="../assets/deku-welcome-page.png">

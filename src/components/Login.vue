@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="container-fluid vh-90 bg-main px-5 py-4">
+    <div class="container-fluid bg-main px-5 py-4">
       <div class="row mt-5">
         <div class="col-md-12 px-5">
           <div class="card">
@@ -43,20 +43,28 @@
           </div>
         </div>
       </div>
-      <button ref="loginModalRef" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#login-modal">
-        Modal Activator
+      <button ref="loginFailModalRef" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#login-fail-modal">
+        Fail Modal Activator
       </button>
-      <LoginModal />
+      <button ref="loginSuccessModalRef" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#login-success-modal">
+        Success Modal Activator
+      </button>
+      <LoginFailModal />
+      <LoginSuccessModal />
     </div>
   </div>
 </template>
 
 <script>
 import utils from '../services/utils'
-import LoginModal from './LoginModal.vue'
+import LoginFailModal from './LoginFailModal.vue'
+import LoginSuccessModal from './LoginSuccessModal.vue'
 import UserService from '../services/usersService'
 export default {
-  components: { LoginModal },
+  components: {
+    LoginFailModal,
+    LoginSuccessModal
+  },
   created () {
     utils.guestAuthenticator(this.$router)
   },
@@ -106,14 +114,31 @@ export default {
 
       let result = (await UserService.funcLogin(loginData)).data
       if (result.errors) {
-        this.$refs.loginModalRef.click()
+        this.$refs.loginFailModalRef.click()
         this.$refs.loginBtn.innerHTML = 'Login'
         this.$refs.loginBtn.disabled = false
         return false
       }
 
+      this.$refs.loginSuccessModalRef.click()
       localStorage.setItem('tokenDetail', JSON.stringify(result))
-      this.$router.go('/home')
+
+      let counter = 4
+      const router = this.$router
+
+      const interval = setInterval(function () {
+        if (counter === 0) {
+          document.getElementById('login-success-counter').innerHTML = 'Redirecting ...'
+          clearInterval(interval)
+        } else {
+          document.getElementById('login-success-counter').innerHTML = counter
+        }
+        counter -= 1
+      }, 1000)
+
+      setTimeout(function () {
+        router.go('/home')
+      }, 5000)
     }
   }
 }

@@ -1,22 +1,33 @@
 <template>
   <div id="app">
-    <div class="bg-secondary vh-100">
+    <div class="bg-secondary">
       <Navigator :token="token"></Navigator>
       <router-view/>
+      <Footer></Footer>
     </div>
   </div>
 </template>
 
 <script>
+import Footer from './components/Footer.vue'
 import Navigator from './components/Navigator.vue'
 export default {
   name: 'App',
-  components: { Navigator },
+  components: {
+    Navigator,
+    Footer
+  },
   created () {
     let user = localStorage.getItem('tokenDetail')
     if (user) {
-      const userInfo = JSON.parse(user)
-      this.token = userInfo.token
+      const expiryDate = new Date(JSON.parse(user).expiry)
+      if (new Date() > expiryDate) {
+        localStorage.removeItem('tokenDetail')
+        location.reload()
+      } else {
+        const userInfo = JSON.parse(user)
+        this.token = userInfo.token
+      }
     }
   },
   data () {
@@ -36,6 +47,9 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Chonburi&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+  body {
+    overflow-x: hidden;
+  }
   #app {
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
@@ -48,6 +62,9 @@ export default {
   }
   img {
     pointer-events: none;
+  }
+  .ff-montserrat {
+    font-family: 'Montserrat', sans-serif;
   }
   .ff-chonburi {
     font-family: 'Chonburi', cursive;
